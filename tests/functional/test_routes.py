@@ -73,5 +73,5 @@ def test_dummy_wrong_method():
     """
     with app.test_client() as client:
         response = client.post('/recipes')
-        assert response.status_code == 405
+        assert response.status_code == 400
 
