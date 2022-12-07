@@ -81,7 +81,6 @@ jobs:
       id: deploy-to-webapp
       with:
         app-name: 'afernandez-assignment-be-pr'
-        slot-name: 'Production'
 
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
@@ -112,5 +111,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'afernandez-assignment-be-dv'
-        slot-name: 'Development'    
+        app-name: 'afernandez-assignment-be-dv'    
