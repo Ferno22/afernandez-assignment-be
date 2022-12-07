@@ -31,28 +31,28 @@ def test_create_recipe(testing_client):
 def test_get_recipe(testing_client):
     """
     GIVEN a Flask application
-    WHEN the '/recipes/<name>' page is requested (GET)
+    WHEN the '/recipes/<id>' page is requested (GET)
     THEN check the response is valid
     """
-    response = testing_client.get('/recipes/recipe1')
+    response = testing_client.get('/recipes/1')
     assert response.status_code == 200
 
 def test_update_recipe(testing_client):
     """
     GIVEN a Flask application
-    WHEN the '/recipes/<name>' page is posted to (PUT)
+    WHEN the '/recipes/<id>' page is posted to (PUT)
     THEN check the response is valid
     """
-    response = testing_client.put('/recipes/recipe1', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
+    response = testing_client.put('/recipes/1', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
     assert response.status_code == 200
 
 def test_delete_recipe(testing_client):
     """
     GIVEN a Flask application
-    WHEN the '/recipes/<name>' page is posted to (DELETE)
+    WHEN the '/recipes/<id>' page is posted to (DELETE)
     THEN check the response is valid
     """
-    response = testing_client.delete('/recipes/recipe1')
+    response = testing_client.delete('/recipes/1')
     assert response.status_code == 200
 
 def test_dummy_wrong_path():
@@ -68,20 +68,10 @@ def test_dummy_wrong_path():
 def test_dummy_wrong_method():
     """
     GIVEN a Flask application
-    WHEN the '/recipes' page is posted to (GET)
+    WHEN the '/recipes' page is requested (GET)
     THEN check the response is valid
     """
     with app.test_client() as client:
-        response = client.get('/recipes', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
+        response = client.post('/recipes')
         assert response.status_code == 405
-
-def test_delete_recipe(testing_client):
-    """
-    GIVEN a Flask application
-    WHEN the '/recipes/<name>' page is posted to (DELETE)
-    THEN check the response is valid
-    """
-    response = testing_client.delete('/recipes/recipe1')
-    assert response.status_code == 200
-
 
