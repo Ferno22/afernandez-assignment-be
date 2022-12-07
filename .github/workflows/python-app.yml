@@ -1,10 +1,10 @@
-name: IEbank backend CICD
+name: Cook Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   workflow_dispatch:
 
 
@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV: ghci
-      DBHOST: bla
-      DBUSER: bla
-      DBPASS: bla
-      DBNAME: bla
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: afernandez-assignment
 
     steps:
     - uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python -m pytest --cov=iebank_api -v
+        python -m pytest --cov=cook_api -v
     - name: Upload artifact for deployment jobs
       uses: actions/upload-artifact@v2
       with:
@@ -51,9 +51,16 @@ jobs:
         path: |
           . 
 
-  deploy:
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
+    env:
+      ENV: prod
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: afernandez-assignment-prod-db
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -73,7 +80,35 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jseijas-iebank-backend'
-        slot-name: 'Production'
+        app-name: 'afernandez-assignment-be-pr'
 
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      ENV: dev
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: afernandez-assignment-dev-db
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: python-app
+        path: .
     
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      id: deploy-to-webapp
+      with:
+        app-name: 'afernandez-assignment-be-dv'    
