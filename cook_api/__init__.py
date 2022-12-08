@@ -12,9 +12,6 @@ load_dotenv()
 if os.getenv('ENV') == 'dev':
     print("Running in development mode")
     app.config.from_object('config.DevelopmentConfig')
-elif os.getenv('ENV') == 'ghci':
-    print("Running in github mode")
-    app.config.from_object('config.GithubCIConfig')
 else:
     print("Running in production mode")
     app.config.from_object('config.ProductionConfig')

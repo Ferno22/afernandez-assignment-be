@@ -24,7 +24,3 @@ class DevelopmentConfig(Config):
     )
     DEBUG = True
 
-class GithubCIConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
-    DEBUG = True
-
