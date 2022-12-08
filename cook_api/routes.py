@@ -9,7 +9,6 @@ def hello_world():
 
 @app.route('/recipes', methods=['POST'])
 def create_recipe():
-    
     name = request.json['name']
     ingredients = request.json['ingredients']
     steps = request.json['steps']
