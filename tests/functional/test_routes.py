@@ -28,6 +28,15 @@ def test_create_recipe(testing_client):
     response = testing_client.post('/recipes', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
     assert response.status_code == 200
 
+def test_create_recipe_wrong_rating(testing_client):
+    """
+    GIVEN a Flask application
+    WHEN the '/recipes' page is posted to (POST)
+    THEN check the response is valid
+    """
+    response = testing_client.post('/recipes', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 6, 'favorite': False})
+    assert response.status_code == 200
+
 def test_get_recipe(testing_client):
     """
     GIVEN a Flask application
