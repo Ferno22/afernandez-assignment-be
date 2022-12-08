@@ -17,4 +17,6 @@ class Recipe(db.Model):
         self.steps = steps
         if rating > 0 and rating < 6:
             self.rating = rating
+        else:
+            self.rating = 1
         self.favorite = favorite
