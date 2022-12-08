@@ -15,5 +15,6 @@ class Recipe(db.Model):
         self.name = name
         self.ingredients = ingredients
         self.steps = steps
-        self.rating = rating
+        if rating > 0 and rating < 6:
+            self.rating = rating
         self.favorite = favorite
