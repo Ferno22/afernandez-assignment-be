@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV: dev
-      DBUSER: postgres
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv.postgres.database.azure.com
       DBNAME: afernandez-assignment-dev-db
@@ -56,7 +56,7 @@ jobs:
     needs: build
     env:
       ENV: prod
-      DBUSER: postgres
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv
       DBNAME: afernandez-assignment-prod-db
@@ -87,7 +87,7 @@ jobs:
     needs: build
     env:
       ENV: dev
-      DBUSER: postgres
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv
       DBNAME: afernandez-assignment-dev-db
