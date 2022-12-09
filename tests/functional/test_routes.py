@@ -1,22 +1,13 @@
 from cook_api import app
 import pytest
 
-def test_hello_world(testing_client):
-    """
-    GIVEN a Flask application
-    WHEN the '/' page is requested (GET)
-    THEN check the response is valid
-    """
-    response = testing_client.get('/')
-    assert response.status_code == 200
-
 def test_get_recipes(testing_client):
     """
     GIVEN a Flask application
     WHEN the '/recipes' page is requested (GET)
     THEN check the response is valid
     """
-    response = testing_client.get('/recipes')
+    response = testing_client.get('/')
     assert response.status_code == 200
 
 def test_create_recipe(testing_client):
@@ -25,7 +16,7 @@ def test_create_recipe(testing_client):
     WHEN the '/recipes' page is posted to (POST)
     THEN check the response is valid
     """
-    response = testing_client.post('/recipes', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
+    response = testing_client.post('/', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
     assert response.status_code == 200
 
 def test_create_recipe_wrong_rating(testing_client):
@@ -34,7 +25,7 @@ def test_create_recipe_wrong_rating(testing_client):
     WHEN the '/recipes' page is posted to (POST)
     THEN check the response is valid
     """
-    response = testing_client.post('/recipes', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 6, 'favorite': False})
+    response = testing_client.post('/', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 6, 'favorite': False})
     assert response.status_code == 200
 
 def test_get_recipe(testing_client):
@@ -43,7 +34,7 @@ def test_get_recipe(testing_client):
     WHEN the '/recipes/<id>' page is requested (GET)
     THEN check the response is valid
     """
-    response = testing_client.get('/recipes/1')
+    response = testing_client.get('/1')
     assert response.status_code == 200
 
 def test_update_recipe(testing_client):
@@ -52,7 +43,7 @@ def test_update_recipe(testing_client):
     WHEN the '/recipes/<id>' page is posted to (PUT)
     THEN check the response is valid
     """
-    response = testing_client.put('/recipes/1', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
+    response = testing_client.put('/1', json={'name': 'recipe1', 'ingredients': 'ingredient1', 'steps': 'step1', 'rating': 1, 'favorite': False})
     assert response.status_code == 200
 
 def test_delete_recipe(testing_client):
@@ -61,7 +52,7 @@ def test_delete_recipe(testing_client):
     WHEN the '/recipes/<id>' page is posted to (DELETE)
     THEN check the response is valid
     """
-    response = testing_client.delete('/recipes/1')
+    response = testing_client.delete('/1')
     assert response.status_code == 200
 
 def test_dummy_wrong_path():
@@ -81,6 +72,6 @@ def test_dummy_wrong_method():
     THEN check the response is valid
     """
     with app.test_client() as client:
-        response = client.post('/recipes')
+        response = client.post('/')
         assert response.status_code == 400
 
