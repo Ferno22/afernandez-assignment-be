@@ -58,7 +58,7 @@ jobs:
       ENV: prod
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBHOST: jseijas-dbsrv
       DBNAME: afernandez-assignment-prod-db
     environment:
       name: 'Production'
@@ -89,7 +89,7 @@ jobs:
       ENV: dev
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBHOST: jseijas-dbsrv
       DBNAME: afernandez-assignment-dev-db
     environment:
       name: 'Development'
