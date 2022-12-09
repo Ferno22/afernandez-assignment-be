@@ -9,18 +9,18 @@ class Config(object):
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-    dbuser=os.getenv('DBUSER'),
-    dbpass=os.getenv('DBPASS'),
-    dbhost=os.getenv('DBHOST'),
-    dbname=os.getenv('DBNAME')
+    dbuser='postgres@jseijas-dbsrv.postgres.database.azure.com',
+    dbpass='Pa$$w0rd1990',
+    dbhost='jseijas-dbsrv.postgres.database.azure.com',
+    dbname='afernandez-assignment-prod-db'
     )
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-    dbuser=os.getenv('DBUSER'),
-    dbpass=os.getenv('DBPASS'),
-    dbhost=os.getenv('DBHOST'),
-    dbname=os.getenv('DBNAME')
+    dbuser='postgres@jseijas-dbsrv.postgres.database.azure.com',
+    dbpass='Pa$$w0rd1990',
+    dbhost='jseijas-dbsrv.postgres.database.azure.com',
+    dbname='afernandez-assignment-dev-db'
     )
     DEBUG = True
 
