@@ -18,11 +18,7 @@ jobs:
     
     runs-on: ubuntu-latest
     env:
-      ENV: dev
-      DBUSER: postgres
-      DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv
-      DBNAME: afernandez-assignment-dev-db
+      ENV: ghci
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
