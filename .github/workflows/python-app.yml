@@ -17,8 +17,6 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
-    env:
-      ENV: dev
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -54,7 +52,7 @@ jobs:
       ENV: prod
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
       DBNAME: afernandez-assignment-prod-db
     environment:
       name: 'Production'
@@ -85,7 +83,7 @@ jobs:
       ENV: dev
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
       DBNAME: afernandez-assignment-dev-db
     environment:
       name: 'Development'
